@@ -1,12 +1,20 @@
-# React + Vite
+# 🏋️‍♂️ MugenMotion – Demon Slayer-Inspired Fitness Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+MugenMotion is an anime-inspired fitness tracker built with **React + TailwindCSS**, drawing design influence from *Demon Slayer*.  
+The app allows users to **log workouts, view history, track progress, and explore exercises** via the **WGER API**.
 
-Currently, two official plugins are available:
+## Features
+- ✍️ **Log Workouts** – track sets, reps, and weights.
+- 📖 **Workout History** – organized by date with details.
+- 📊 **Progress Tracking** – visualize progress with charts.
+- ⚔️ **Explore Exercises** – fetch data from the WGER API.
+- 🎨 **Anime-Themed UI** – colors and styles inspired by Demon Slayer.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- **React** (Frontend framework)
+- **Tailwind CSS** (Styling)
+- **Framer Motion** (Animations)
+- **Lucide Icons** (UI Icons)
+- **WGER API** (Exercise database)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
