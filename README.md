@@ -1,4 +1,4 @@
-# 🏋️‍♂️ MugenMotion – Demon Slayer-Inspired Fitness Tracker
+# 🏋️‍♂️ MugenMotion – Anime-Inspired Fitness Tracker
 
 ## Overview
 MugenMotion is an anime-inspired fitness tracker built with **React + TailwindCSS**, drawing design influence from *Demon Slayer*.  
