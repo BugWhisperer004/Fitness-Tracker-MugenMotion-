@@ -5,14 +5,16 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <>
+    <div className="bg-black min-h-screen text-white">
       <Navbar />
       <Home />
       <Footer />
-    </>
+    </div>
   );
 }
 
 export default App;
+
+
 
 

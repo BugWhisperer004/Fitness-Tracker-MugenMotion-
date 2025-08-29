@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Home() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white px-4">
+        <div className="flex flex-col items-center justify-center min-h-screen px-4">
             <h1 className="text-5xl font-bold mb-6 text-neonPink">
                 MugenMotion
             </h1>
@@ -15,3 +15,4 @@ export default function Home() {
         </div>
     );
 }
+

@@ -7,7 +7,7 @@ export default function Footer() {
                 <p className="text-sm text-neon-green drop-shadow-[0_0_10px_rgba(57,255,20,0.7)]">
                     &copy; {new Date().getFullYear()} MugenMotion. All rights reserved.
                 </p>
-                <div className="mt-4 flex justify-center gap-6">
+                <div className="mt-4 flex justify-center gap-10">
                     <a
                         href="#"
                         className="text-neon-pink hover:text-neon-green transition-colors duration-300 drop-shadow-[0_0_10px_rgba(255,110,199,0.7)]"
