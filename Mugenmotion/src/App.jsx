@@ -4,16 +4,13 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import WorkoutLog from "./components/WorkoutLog";
 import WorkoutHistory from "./components/WorkoutHistory";
+import WorkoutSummary from "./components/WorkoutSummary";
 
 function App() {
   const [workouts, setWorkouts] = useState([]);
 
   const addWorkout = (workout) => {
-    const workoutWithDate = {
-      ...workout,
-      date: new Date().toLocaleDateString(), // attach date when logged
-    };
-    setWorkouts((prev) => [workoutWithDate, ...prev]);
+    setWorkouts((prev) => [workout, ...prev]); // add to top
   };
 
   return (
@@ -22,6 +19,7 @@ function App() {
       <main className="min-h-screen bg-black text-white px-4 py-6">
         <Home />
         <WorkoutLog onAddWorkout={addWorkout} />
+        <WorkoutSummary workouts={workouts} />
         <WorkoutHistory workouts={workouts} />
       </main>
       <Footer />
@@ -30,6 +28,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
