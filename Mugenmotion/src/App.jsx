@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -9,7 +9,11 @@ function App() {
   const [workouts, setWorkouts] = useState([]);
 
   const addWorkout = (workout) => {
-    setWorkouts((prev) => [workout, ...prev]); // add to top
+    const workoutWithDate = {
+      ...workout,
+      date: new Date().toLocaleDateString(), // attach date when logged
+    };
+    setWorkouts((prev) => [workoutWithDate, ...prev]);
   };
 
   return (
@@ -26,6 +30,8 @@ function App() {
 }
 
 export default App;
+
+
 
 
 
