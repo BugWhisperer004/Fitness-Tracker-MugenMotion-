@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ExerciseSearch = () => {
+const ExerciseSearch = ({ onSelectExercise }) => {
     const [query, setQuery] = useState("");
     const [exercises, setExercises] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -32,44 +32,71 @@ const ExerciseSearch = () => {
         fetchExercises(query);
     };
 
+    // helper to strip HTML and provide fallback text
+    const formatDescription = (desc) => {
+        if (!desc || desc.trim() === "") {
+            return "Description not available for this exercise.";
+        }
+        return desc.replace(/<[^>]+>/g, ""); // remove HTML tags
+    };
+
     return (
-        <div className="p-4 max-w-2xl mx-auto">
-            <form onSubmit={handleSubmit} className="flex gap-2 mb-4">
+        <div className="p-6 max-w-2xl mx-auto bg-gray-900 rounded-xl shadow-lg text-white">
+            <form onSubmit={handleSubmit} className="flex gap-2 mb-6">
                 <input
                     type="text"
                     placeholder="Search for an exercise..."
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    className="flex-grow p-2 border rounded-lg"
+                    className="flex-grow p-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-neonPink"
                 />
                 <button
                     type="submit"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    className="px-4 py-2 bg-neonPink text-black font-bold rounded-lg hover:brightness-110 transition"
                 >
                     Search
                 </button>
             </form>
 
-            {loading && <p>Loading...</p>}
+            {loading && <p className="text-gray-400">Loading...</p>}
             {error && <p className="text-red-500">{error}</p>}
 
-            <ul className="space-y-2">
+            <ul className="space-y-4">
                 {exercises.map((exercise) => (
                     <li
                         key={exercise.id}
-                        className="p-3 border rounded-lg bg-gray-50 shadow-sm"
+                        onClick={() =>
+                            onSelectExercise && onSelectExercise(exercise.name)
+                        }
+                        className={`p-4 border border-gray-700 rounded-lg bg-gray-800 transition cursor-pointer ${onSelectExercise
+                                ? "hover:shadow-[0_0_15px_#ff6ec7] hover:bg-gray-700"
+                                : ""
+                            }`}
                     >
-                        <h3 className="font-bold">{exercise.name}</h3>
-                        <p className="text-sm text-gray-600">
-                            {exercise.description
-                                ? exercise.description.replace(/<[^>]+>/g, "")
-                                : "No description available."}
+                        <h3 className="font-bold text-neonPink text-lg">
+                            {exercise.name}
+                        </h3>
+                        <p className="text-sm text-gray-300 mt-1">
+                            {formatDescription(exercise.description)}
                         </p>
+                        {onSelectExercise && (
+                            <p className="text-xs text-gray-500 mt-2">
+                                Click to select this exercise
+                            </p>
+                        )}
                     </li>
                 ))}
             </ul>
+
+            {exercises.length === 0 && !loading && !error && (
+                <p className="text-gray-500 text-center mt-6">
+                    Try searching for "Push-up", "Squat", or "Plank" to get started!
+                </p>
+            )}
         </div>
     );
 };
 
 export default ExerciseSearch;
+
+

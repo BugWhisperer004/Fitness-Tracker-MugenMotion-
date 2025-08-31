@@ -1,14 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import LogWorkout from "./pages/LogWorkout";
-import History from "./pages/History";
+import WorkoutHistory from "./pages/WorkoutHistory";
 import Progress from "./pages/Progress";
 
 function App() {
   const [workouts, setWorkouts] = useState([]);
+
+  // Load workouts from localStorage on first render
+  useEffect(() => {
+    const stored = localStorage.getItem("workouts");
+    if (stored) {
+      setWorkouts(JSON.parse(stored));
+    }
+  }, []);
+
+  // Save workouts to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("workouts", JSON.stringify(workouts));
+  }, [workouts]);
 
   const addWorkout = (workout) => {
     setWorkouts((prev) => [workout, ...prev]); // add new workout to top
@@ -23,11 +36,12 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route
               path="/log"
-              element={<LogWorkout onAddWorkout={addWorkout} />}
-            />
-            <Route
-              path="/history"
-              element={<History workouts={workouts} />}
+              element={
+                <div className="space-y-6">
+                  <LogWorkout onAddWorkout={addWorkout} />
+                  <WorkoutHistory workouts={workouts} />
+                </div>
+              }
             />
             <Route
               path="/progress"
@@ -42,6 +56,8 @@ function App() {
 }
 
 export default App;
+
+
 
 
 
