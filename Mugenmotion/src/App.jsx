@@ -1,33 +1,50 @@
 import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import WorkoutLog from "./components/WorkoutLog";
-import WorkoutHistory from "./components/WorkoutHistory";
-import WorkoutSummary from "./components/WorkoutSummary";
+import LogWorkout from "./pages/LogWorkout";
+import History from "./pages/History";
+import Progress from "./pages/Progress";
 
 function App() {
   const [workouts, setWorkouts] = useState([]);
 
   const addWorkout = (workout) => {
-    setWorkouts((prev) => [workout, ...prev]); // add to top
+    setWorkouts((prev) => [workout, ...prev]); // add new workout to top
   };
 
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen bg-black text-white px-4 py-6">
-        <Home />
-        <WorkoutLog onAddWorkout={addWorkout} />
-        <WorkoutSummary workouts={workouts} />
-        <WorkoutHistory workouts={workouts} />
-      </main>
-      <Footer />
-    </>
+    <Router>
+      <div className="min-h-screen flex flex-col bg-black text-white">
+        <Navbar />
+        <main className="flex-1 px-4 py-6">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/log"
+              element={<LogWorkout onAddWorkout={addWorkout} />}
+            />
+            <Route
+              path="/history"
+              element={<History workouts={workouts} />}
+            />
+            <Route
+              path="/progress"
+              element={<Progress workouts={workouts} />}
+            />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
 export default App;
+
+
+
 
 
 
