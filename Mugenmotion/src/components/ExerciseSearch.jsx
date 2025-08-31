@@ -6,14 +6,17 @@ const ExerciseSearch = ({ onSelectExercise }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
+    // ✅ Read the API URL from your .env file
+    const API_URL = import.meta.env.VITE_WGER_API;
+
     const fetchExercises = async (searchTerm) => {
-        if (!searchTerm) return; // don't fetch empty queries
+        if (!searchTerm) return; // Don't fetch empty queries
 
         setLoading(true);
         setError("");
         try {
             const response = await fetch(
-                `https://wger.de/api/v2/exercise/?language=2&limit=20&search=${searchTerm}`
+                `${API_URL}?language=2&limit=20&search=${searchTerm}`
             );
             if (!response.ok) {
                 throw new Error("Failed to fetch exercises");
@@ -32,12 +35,12 @@ const ExerciseSearch = ({ onSelectExercise }) => {
         fetchExercises(query);
     };
 
-    // helper to strip HTML and provide fallback text
+    // Helper to strip HTML and provide fallback text
     const formatDescription = (desc) => {
         if (!desc || desc.trim() === "") {
             return "Description not available for this exercise.";
         }
-        return desc.replace(/<[^>]+>/g, ""); // remove HTML tags
+        return desc.replace(/<[^>]+>/g, ""); // Remove HTML tags
     };
 
     return (
@@ -98,5 +101,7 @@ const ExerciseSearch = ({ onSelectExercise }) => {
 };
 
 export default ExerciseSearch;
+
+
 
 
